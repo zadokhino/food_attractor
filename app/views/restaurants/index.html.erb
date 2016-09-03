@@ -1,0 +1,6 @@
+<h1>Все заведения</h1>
+<% @restaurants.each do |restaurant| %>
+	<%= link_to restaurant.name, restaurant_path(restaurant.id) %>
+	<%= image_tag restaurant.image.url(:medium) %>
+	<%= restaurant.description %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903061338) do
+ActiveRecord::Schema.define(version: 20160903071337) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160903061338) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "foods", force: :cascade do |t|
-    t.text     "name"
+    t.string   "name"
     t.float    "price"
     t.text     "description"
     t.datetime "created_at",    null: false

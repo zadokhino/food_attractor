@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
+  root 'restaurants#index'
   devise_for :users
   ActiveAdmin.routes(self)
+  resources :restaurants, only: [:show]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

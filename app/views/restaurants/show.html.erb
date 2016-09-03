@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-sm-3 col-sm-offset-1">
+	   <h1><%= @restaurant.name %></h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-3 col-sm-offset-1">
+		<%= image_tag @restaurant.image.url(:medium) %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-3 col-sm-offset-1">
+		<%= @restaurant.description %>
+	</div>
+</div>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-1">
+        <div class="row">
+            <% @restaurant.foods.each do |food| %>
+                <div class="col-sm-6 product-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3><%= food.name %></h3>
+                            <h4><%= food.description %></h4>
+                            <h4><%= food.price %></h4>
+                            <p>
+                                <button class="btn btn-primary">Add to cart</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="panel panel-default" id="cart">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cart</h3>
+            </div>
+            <div class="panel-body">
+                Your cart is empty
+            </div>
+        </div>
+    </div>
+</div>
