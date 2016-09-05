@@ -23,23 +23,36 @@
                             <h3><%= food.name %></h3>
                             <h4><%= food.description %></h4>
                             <h4><%= food.price %></h4>
-                            <p>
-                                <button class="btn btn-primary">Add to cart</button>
-                            </p>
+                            <% if user_signed_in? %>
+                                <%= button_to 'Add to Cart', line_items_path(food_id: food), class: "btn btn-primary" %>
+                            <% end %>
                         </div>
                     </div>
                 </div>
             <% end %>
         </div>
     </div>
+    <% if user_signed_in? %>
     <div class="col-sm-2">
         <div class="panel panel-default" id="cart">
             <div class="panel-heading">
                 <h3 class="panel-title">Cart</h3>
             </div>
             <div class="panel-body">
-                Your cart is empty
+                <% @cart = Cart.last %>
+                <% if @cart == nil %>
+                    "The cart is empty"
+                <% else %>
+                    <ul>
+                        <% @cart.line_items.each do |item| %>
+                            <li><%= item.food.name %> x <%= item.quantity %> = <%= item.total_price %></li>
+                        <% end %>
+                        <li>Итого: <%= @cart.total_price %> сом</li>
+                    </ul>
+                    <%= button_to 'Empty cart', @cart, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
             </div>
         </div>
     </div>
+    <% end %>
 </div>

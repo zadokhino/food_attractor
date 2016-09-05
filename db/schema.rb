@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903091150) do
+ActiveRecord::Schema.define(version: 20160905055505) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -47,14 +47,9 @@ ActiveRecord::Schema.define(version: 20160903091150) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "carts", force: :cascade do |t|
-    t.float    "amount"
-    t.float    "total_sum"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "restaurant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "carts", ["restaurant_id"], name: "index_carts_on_restaurant_id"
 
   create_table "foods", force: :cascade do |t|
     t.string   "name"
@@ -63,11 +58,20 @@ ActiveRecord::Schema.define(version: 20160903091150) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "restaurant_id"
-    t.integer  "cart_id"
   end
 
-  add_index "foods", ["cart_id"], name: "index_foods_on_cart_id"
   add_index "foods", ["restaurant_id"], name: "index_foods_on_restaurant_id"
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "food_id"
+    t.integer  "cart_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "quantity",   default: 1
+  end
+
+  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id"
+  add_index "line_items", ["food_id"], name: "index_line_items_on_food_id"
 
   create_table "restaurants", force: :cascade do |t|
     t.string   "name"
